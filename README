@@ -1,0 +1,13 @@
+Create your own web crawler using Python.   At runtime, the user should be prompted to provide a starting URL.  
+The program then should visit that URL and identify additional URLS to follow (scrape for http/https links) and follow those links until it reaches a pre-determined stopping point.  
+A list of all urls pulled should be output from the program on completion.
+
+1) User can specify a starting URL  (not hard-coded in the program)
+
+2) Code will crawl the staring site, identify urls on the site and the crawl those urls.
+
+3) Code has a reasonable stopping pont (maximum depth of traversal, maximum number of sites crawled)
+
+4) Code avoids pulling from the same url twice (de duplication)
+
+5) Code is well commented - i.e. 'why' of each significant part is explained (not just what)
