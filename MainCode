@@ -1,25 +1,26 @@
-# Spider - requirements: Ask for starting URL, visit starting URL, get all URLS on that page
-# then pull from each of those URLS and get next set (keep following). Stop when done! 
+# Spider - Requirements: Ask for starting URL, visit starting URL, get all URLS on that page
+# Then pull from each of those URLS and get next set (keep following). Stop when done! 
 
-max_sites = 50 #Max amount of sites to crawl
+max_sites = 50 # Max amount of sites to crawl
 
-import requests #We need to import the requests module, containing HTTP commands such as GET
-import re #extract URLS from the users returned sites
+import requests # We need to import the requests module, containing HTTP commands such as GET
+import re # extract URLS from the users returned sites
 
 # Variables defined globally
 
-userWebsite = input("Enter a website: ") #User passes domain to search
-crawled_sites = [] #Keep track of sites already visited
-found_sites = [] #Keep track of sites found and not crawled yet
-url_regex = '(https?:\/\/.+?(?=[" ?\')]))' #Regular Expression to match URLS found via website's text output
-counter = 0 #Counter initiliazation to help keep track of how many sites visited
+userWebsite = input("Enter a website: ") # User passes URL to search
+crawled_sites = [] # Keep track of sites already visited
+found_sites = [] # Keep track of sites found and not crawled yet
+url_regex = '(https?:\/\/.+?(?=[" ?\')]))' # Regular Expression to match URLS found via website's text output
+counter = 0 # Counter initiliazation to help keep track of how many sites visited
 
-pageResponse = requests.get(userWebsite) #User domain is passed to GET request via HTTP
+pageResponse = requests.get(userWebsite) # User domain is passed to GET request via HTTP
 
-found_sites = re.findall(url_regex, pageResponse.text) #Will run our regex match against the returned page's text and store matches in list variable
+found_sites = re.findall(url_regex, pageResponse.text) # Will run our regex match against the returned page's text and store matches in list variable
 
 
 #Running a loop for all the links until total sites visted
+
 for sites in found_sites:
     counter += 1
     if counter > max_sites:
@@ -27,13 +28,10 @@ for sites in found_sites:
     if sites in crawled_sites:
         print(f'SKIPPING site: {sites}')
     else:
-        print(f'Visiting site: {sites}') #print out site that we are visiting
-        pageResponse = requests.get(sites) #Pass each visited site to a GET Request via HTTP
+        print(f'Visiting site: {sites}') # Print out site that we are visiting
+        pageResponse = requests.get(sites) # Pass each visited site to a GET Request via HTTP
         page_text = pageResponse.text
         crawled_sites.append(sites)
         print(f'Appending site to crawled sites: {sites}')
 
-        found_sites.extend(re.findall(url_regex, pageResponse.text)) #run regex match to get list of urls and add to the found_sites list
-
-
-
+        found_sites.extend(re.findall(url_regex, pageResponse.text)) # Run regex match to get list of urls and add to the found_sites list
