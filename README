@@ -21,14 +21,3 @@ A list of all urls pulled should be output from the program on completion.
 4) Code avoids pulling from the same url twice (de duplication)
 
 5) Code is well commented - i.e. 'why' of each significant part is explained (not just what)
-
-
-<!--
- ```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
---!>
